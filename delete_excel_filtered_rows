@@ -1,0 +1,28 @@
+Sub Delete()
+    
+    Dim firstRow    As Long
+    Dim lastRow     As Long
+    Dim ws          As Worksheet
+    
+    Set ws = ThisWorkbook.Sheets(1)
+    
+    firstRow = 0
+    lastRow = Range("A1").End(xlDown).Row
+    
+    For i = 2 To lastRow
+        If ws.Rows(i).Hidden = False Then
+            firstRow = i
+            Exit For
+            
+        End If
+        
+    Next i
+    
+    Sheets("sheet2").Range("A3").Value = firstRow
+    Sheets("sheet2").Range("A4").Value = lastRow
+    
+    Rows(firstRow & ":" & lastRow).Select
+    
+    Selection.Delete shift:=xlUp
+    
+End Sub
